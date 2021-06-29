@@ -1,19 +1,19 @@
 const charles = {
-    firstName: 'Charles'
-    lastName: 'Windsor'
+    firstName: 'Charles',
+    lastName: 'Windsor',
     parents: []
 }
 
 const diana = {
-    firstName: 'Diana'
-    lastName: 'Wales'
+    firstName: 'Diana',
+    lastName: 'Wales',
     parents: []
 }
 
 const harry = {
     firstName: 'Harry',
     lastName: 'Windsor',
-    parents[charles, diana],
+    parents: [charles, diana],
     childOf: function () {
         return this.parents.map(parent => parent.firstName).join(' & ') || "unknown"
     }
