@@ -1,0 +1,15 @@
+@startuml
+
+actor User
+participant Code
+participant App
+database Scooter
+
+User -> Code: scan code
+Code -> Code: validate input
+Code -> App: retrieve data for the scooter
+App -> Scooter: allow user to take scooter
+
+
+
+@enduml
