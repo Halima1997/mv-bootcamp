@@ -1,15 +1,20 @@
 @startuml
 
 actor User
-participant Code
-participant App
-database Scooter
+participant ScooterHireApp
+actor Scooter
+participant ScooterHireBackendAPI
+participant HireTransaction
+database ScooterHireDatabase
+actor ChargingStation
 
-User -> Code: scan code
-Code -> Code: validate input
-Code -> App: retrieve data for the scooter
-App -> Scooter: allow user to take scooter
-
-
+User -> ScooterHireApp: requestHire
+User -> Scooter: scanQRCode
+ScooterHireApp -> ScooterHireBackendAPI: startHire(scooterID)
+ScooterHireApp -> ChargingStation: releaseScooter
+ScooterHireBackendAPI -> HireTransaction: create(userName, scooterID)
+ChargingStation -> ChargingStation: releaseScooter
+ScooterHireBackendAPI -> Scooter: isCharged
+ScooterHireBckendAPI -> Scooter: currentMileage
 
 @enduml

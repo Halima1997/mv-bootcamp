@@ -49,12 +49,17 @@ class Person {
     - String: name
 }
 
-Scooter <-- User
-QRCode <-- User
+Scooter <-- User: hire
+QRCode <-- User: scan
 ChargingStation "1" o-- Scooter
 User --|> Person
 MaintenancePerson --|> Person
 Scooter "1" o-- MaintenancePerson
+Scooter "1" o-- QRCode
+RegisteredUser --|> Person
+Scooter <-- RegisteredUser
+QRCode <-- RegisteredUser: scan
+HireTransaction "1" o-- Payment
 
 class QRCode {
 
