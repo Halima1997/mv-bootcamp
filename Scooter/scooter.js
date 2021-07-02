@@ -1,5 +1,6 @@
 class Scooter {
     batteryPercentage;
+    qrCode;
     isBroken=false
 
 constructor(id) {
@@ -16,11 +17,30 @@ reportBroken () {
 }
 
 charge () {
-    if (!isBroken) {
+    if (!this.isBroken) {
         return true 
     } else {
         return false
     }
 }
+constructor(qrCode) {
+    if (!qrCode) {
+        throw new Error('must scan correct qr code ');
+    }
+    this.qrCode=qrCode;
+    this.isBroken = false
 }
-module.exports=Scooter
+reportBroken () {
+    isBroken = true 
+}
+
+charge () {
+    if (!this.isBroken) {
+        return true 
+    } else {
+        return false  
+
+}
+
+module.exports=scooter 
+

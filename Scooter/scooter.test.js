@@ -7,5 +7,8 @@ describe('Scooter', function() {
 
     });
 
+    test('correct qr code', function() {
+        const scooter = new Scooter(1);
+        expect(scooter.qrCode()).toBeTruthy();
     
-});
+})
