@@ -1,13 +1,27 @@
 const Passenger = require('./Passenger')
+const Bag = require('./Bag')
 
-describe('Passenger', function() {
-    test('has a number', function() {
+describe('Passenger', () => {
+    test('has a name', () => {
+        const bag = new Bag(10)
+        const halima = new Passenger("halima")
         const passenger = new Passenger(8);
-        expect(passenger.number).toBe(8);
+        halima.addBag(bag);
+        expect(halima.name).toEqual("halima")
+
+        expect(passenger.name).toBe(halima);
 
     });
 
-    test('does not have a number', function (){
-        expect(() => new Passenger()).toThrowError('passenger must have a number');
+    test('does not have a name', () => {
+        expect(() => new Passenger()).toThrowError('passenger must have a name');
     });
+
+    test('has bags', () => {
+        const yellowBag = new Bag(10);
+        const pax1 = new Passenger('halima');
+
+        pax1.addBag(yellowBag);
+        console.log(pax1.bags);
+    })
 });

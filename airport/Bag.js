@@ -1,5 +1,5 @@
 class Bag {
-    height;
+
     weight;
 
 constructor(weight) {

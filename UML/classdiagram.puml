@@ -1,0 +1,29 @@
+
+title Airports - Class Diagram
+
+
+class Person {
+    String name
+    String getName()
+
+}
+
+Person <|-- Passenger
+Person <|-- Crew
+
+class Passenger {
+
+}
+
+
+class Plane {
+    String aircraftType
+    
+
+}
+
+
+Plane o-- Passenger
+Plane o-- Crew
+
+

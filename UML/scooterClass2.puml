@@ -1,0 +1,65 @@
+
+title Electric Scoter Hire - Class Diagram
+
+
+class Scooter {
+    - QRCode
+    - Indicators
+    - Status 
+    - Speedometer
+    - Tyres
+    - MaxSpeed
+    - Accelerator
+    + charge()
+    
+
+}
+
+class RegisteredUser {
+    - String userId 
+}
+
+class User {
+
+}
+
+class Payment {
+
+}
+
+class ChargingStation {
+
+    + lockedScooter
+    + unlockedScooter
+}
+
+class HireTransaction {
+    - registeredUser
+    - distanceTravelled
+    - Scooter 
+    + getTotalCharge()
+}
+
+class MaintenancePerson {
+    -employeeID
+    + fixScooter()
+}
+
+class Person {
+    - String: name
+}
+
+Scooter <-- User
+QRCode <-- User
+ChargingStation "1" o-- Scooter
+User --|> Person
+MaintenancePerson --|> Person
+Scooter "1" o-- MaintenancePerson
+
+class QRCode {
+
+}
+
+
+
+

@@ -1,12 +1,9 @@
-class Passenger {
-    number;
+const person = require('./Person')
 
-constructor(number) {
-    if (!number) {
-        throw new Error('passenger must have a number');
-    }
-    this.number=number;
-}
+class passenger extends Bag {
+    bagWeight;
+
+    constructor(bagWeight,)
 }
 
 

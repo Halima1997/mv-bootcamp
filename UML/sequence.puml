@@ -1,0 +1,23 @@
+@startuml
+
+actor Customer
+participant BASite
+participant FlightsAPI
+database FlightsDatabase
+participant Payment
+
+Customer -> BASite: enter search criteria 
+BASite -> BASite: validate input
+BASite -> FlightsAPI: retrieve matching flights(search criteria)
+FlightsAPI -> FlightsDatabase: locateFlights(from, to, dates. numPax)
+FlightsDatabase --> FlightsAPI: matching flights
+FlightsAPI --> BASite: matching flights
+BASite --> Customer: matching flights
+FlightsDatabase --> Payment: calculate cost
+Payment --> Customer: total cost
+Customer --> Payment: billing information
+Customer --> Payment: card details
+Customer --> Payment: confirm details
+
+
+@enduml
