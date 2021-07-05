@@ -13,4 +13,4 @@ describe('Scooter', function() {
         expect(scooter.qrCode).toBe(2);
     
     });
-})
+}) 

@@ -44,5 +44,5 @@ class Scooter {
     }
 }
 
-module.exports = Scooter
+module.exports = Scooter 
 
