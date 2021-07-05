@@ -1,5 +1,7 @@
 @startuml
 
+title Hire Scooter
+
 actor User
 participant ScooterHireApp
 actor Scooter
@@ -15,6 +17,9 @@ ScooterHireApp -> ChargingStation: releaseScooter
 ScooterHireBackendAPI -> HireTransaction: create(userName, scooterID)
 ChargingStation -> ChargingStation: releaseScooter
 ScooterHireBackendAPI -> Scooter: isCharged
-ScooterHireBckendAPI -> Scooter: currentMileage
+ScooterHireBackendAPI -> Scooter: currentMileage
+ScooterHireBackendAPI -> ScooterHireDatabase: saveHireTransaction
+ScooterHireBackendAPI -> Scooter: isWorking
+ScooterHireApp -> User: scanScooterQRCode
 
 @enduml
