@@ -13,4 +13,11 @@ describe('Scooter', function() {
         expect(scooter.qrCode).toBe(2);
     
     });
-}) 
+
+    test('incorrect id', function() {
+        expect(() => new Scooter ()).toThrowError('must have an id');
+
+    });
+
+
+})

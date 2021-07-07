@@ -10,7 +10,7 @@ class Scooter {
         }
         this.id = id;
         if (!qrCode) {
-            throw new Error('must scan correct qr code ');
+           throw new Error('must scan correct qr code ');
         }
         this.qrCode = qrCode;
 
