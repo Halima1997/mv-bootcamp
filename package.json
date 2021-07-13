@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Halima1997/mv-bootcamp#readme",
   "dependencies": {
-    "jest": "^27.0.6"
-  }
+    "jest": "^27.0.6",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {}
 }
