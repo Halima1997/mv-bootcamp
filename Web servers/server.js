@@ -14,6 +14,8 @@ const port = 3000;
 
 app.use(express.static("public"));
 
+app.use(express.urlencoded({ extended: true }))
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
@@ -36,12 +38,15 @@ app.get("/flipcoin", (request, response) => {
   }
 });
 //READ
-app.get("/restaurants", (request, response) => {
+app.get("/restaurants", async (request, response) => {
   response.send("All restos");
+  
 });
 //CREATE
-app.post("/restaurants", (request, response) => {
+app.post("/restaurants", async (request, response) => {
   console.log (request.body)
+  await Restaurant.create(request.body);
+  response.sendStatus(201);
 
  // const Restaurant = await Restaurant.create({ name: "Jane" });
 
