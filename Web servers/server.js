@@ -2,6 +2,10 @@ const express = require("express");
 
 const Restaurant = require('./models/Restaurant');
 
+const Menu = require('./models/Menu');
+
+const MenuItem = require('./Models/MenuItem');
+
 // connects and creates database
 const sequelizeConnect = require("./sequelize-connect");
 
@@ -13,6 +17,11 @@ app.use(express.static("public"));
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+Restaurant.hasMany(Menu)
+Menu.belongsTo(Restaurant)
+Menu.hasMany(MenuItem)
+MenuItem.belongsTo(Menu)
 
 app.get("/now", (request, response) => {
   const date = new Date();
@@ -32,7 +41,11 @@ app.get("/restaurants", (request, response) => {
 });
 //CREATE
 app.post("/restaurants", (request, response) => {
-  response.send("Create resto");
+  console.log (request.body)
+
+ // const Restaurant = await Restaurant.create({ name: "Jane" });
+
+
 });
 //UPDATE
 app.put("/restaurants", (request, response) => {
