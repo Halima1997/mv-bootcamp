@@ -3,9 +3,23 @@ const express = require("express");
 const Restaurant = require("./models/Restaurant");
 const Menu = require("./models/Menu");
 const MenuItem = require("./Models/MenuItem");
+
+const Handlebars = require('handlebars')
+const expressHandlebars = require('express-handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
+// setup our templating engine
+const handlebars = expressHandlebars({
+  handlebars: allowInsecurePrototypeAccess(Handlebars)
+})
+
+const app = express();
+app.engine('handlebars', handlebars)
+app.set('view engine', 'handlebars')
+
 // connects and creates database
 const sequelizeConnect = require("./sequelize-connect");
-const app = express();
+
 const port = 3000;
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +44,10 @@ app.get("/flipcoin", (request, response) => {
 //READ
 app.get("/restaurants", async (request, response) => {
   const restaurants = await Restaurant.findAll();
-  response.send(restaurants);
+  //response.send(restaurants);
+  response.render('restaurants', {
+    restaurants
+  })
 });
 
 app.get("/restaurants/:id", async (request, response) => {
@@ -45,6 +62,17 @@ app.get("/restaurants/:id", async (request, response) => {
     response.send(restaurant);
   }
 });
+
+//HANDLEBAR GET
+app.get('/web/restaurants', async (req,res) => {
+  const restaurants = await Restaurant.findAll()
+  res.render('restaurant', {restaurants })
+})
+app.get('web/restaurants/:id', async (req,res) => {
+  const restaurant = await Restaurant.findByPk(req.params.id)
+  res.render('restaurant', {restaurant })
+})
+
 //CREATE
 app.post("/restaurants", async (request, response) => {
   console.log(request.body); // Similiar to sending a letter, and needing to include an envelope, letter etc.

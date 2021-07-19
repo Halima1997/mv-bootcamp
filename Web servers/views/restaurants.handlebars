@@ -1,0 +1,15 @@
+<h1>{{restaurants.length}} Restaurants
+</h1>
+<section>
+    {{#each restaurants}}
+        <article>
+            <h1>{{this.name}}
+            </h1>
+           <img src="{{this.image}}" alt="image of {{this.name}}" />
+
+        </article>
+
+    {{/each}}
+
+</section>
+
