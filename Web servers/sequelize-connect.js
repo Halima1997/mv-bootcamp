@@ -9,10 +9,7 @@ const dbConnection = new Sequelize('db', 'user', 'pass', {
 
 // launches sequelize and adds tables
 dbConnection
-  .sync({
-      // drop all tables on sync
-      force: true
-  })
+  .sync()
   .then(() => {
     console.log('Connected to DB');
   })
