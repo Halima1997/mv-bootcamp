@@ -36,7 +36,7 @@ async function loadAndInsert() {
                 for (j = 0; j < currentRestaurant.menus.length; j++) {
                     const currentMenu = currentRestaurant.menus[j];
                     try {
-                        stmt = db.prepare(`INSERT INTO MENUS (title, restaurant_id) VALUES (?, ?)`);
+                        stmt = db.prepare(`INSERT INTO MENUS (title, RestaurantId) VALUES (?, ?)`);
                         stmt.run(currentMenu.title, i + 1);
                     } finally {
                         
@@ -47,7 +47,7 @@ async function loadAndInsert() {
                         const currentMenuItem = currentMenu.items[k];
 
                         try {
-                            stmt = db.prepare(`INSERT INTO MENU_ITEMS (name, price, menu_id) VALUES (?, ?, ?)`);
+                            stmt = db.prepare(`INSERT INTO MENUITEMS (name, price, MenuId) VALUES (?, ?, ?)`);
                             stmt.run(currentMenuItem.name, currentMenuItem.price, menuCounter);
                         } finally {
                             

@@ -4,18 +4,20 @@ const Restaurant = require("./models/Restaurant");
 const Menu = require("./models/Menu");
 const MenuItem = require("./Models/MenuItem");
 
-const Handlebars = require('handlebars')
-const expressHandlebars = require('express-handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const Handlebars = require("handlebars");
+const expressHandlebars = require("express-handlebars");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 
 // setup our templating engine
 const handlebars = expressHandlebars({
-  handlebars: allowInsecurePrototypeAccess(Handlebars)
-})
+  handlebars: allowInsecurePrototypeAccess(Handlebars),
+});
 
 const app = express();
-app.engine('handlebars', handlebars)
-app.set('view engine', 'handlebars')
+app.engine("handlebars", handlebars);
+app.set("view engine", "handlebars");
 
 // connects and creates database
 const sequelizeConnect = require("./sequelize-connect");
@@ -45,33 +47,34 @@ app.get("/flipcoin", (request, response) => {
 app.get("/restaurants", async (request, response) => {
   const restaurants = await Restaurant.findAll();
   //response.send(restaurants);
-  response.render('restaurants', {
-    restaurants
-  })
+  response.render("restaurants", {
+    restaurants,
+  });
 });
 
 app.get("/restaurants/:id", async (request, response) => {
   const restaurantid = request.params.id;
   const restaurant = await Restaurant.findByPk(restaurantid, {
-    include: [Menu]
+    include: [Menu],
   });
   console.log(restaurant);
   if (restaurant === null) {
     response.sendStatus(404);
   } else {
-    response.send(restaurant);
+    // response.send(restaurant);
+    response.render("restaurant", { restaurant });
   }
 });
 
 //HANDLEBAR GET
-app.get('/web/restaurants', async (req,res) => {
-  const restaurants = await Restaurant.findAll()
-  res.render('restaurant', {restaurants })
-})
-app.get('web/restaurants/:id', async (req,res) => {
-  const restaurant = await Restaurant.findByPk(req.params.id)
-  res.render('restaurant', {restaurant })
-})
+// app.get('/web/restaurants', async (req,res) => {
+//   const restaurants = await Restaurant.findAll()
+//   res.render('restaurant', {restaurants })
+// })
+// app.get('web/restaurants/:id', async (req,res) => {
+//   const restaurant = await Restaurant.findByPk(req.params.id)
+//   res.render('restaurant', {restaurant })
+// })
 
 //CREATE
 app.post("/restaurants", async (request, response) => {
@@ -117,7 +120,7 @@ app.get("/menus", async (request, response) => {
 app.get("/menus/:id", async (request, response) => {
   const menuid = request.params.id;
   const menu = await Menu.findByPk(menuid, {
-    include:[Restaurant]
+    include: [Restaurant],
   });
   console.log(Menu);
   if (menu === null) {
@@ -167,7 +170,7 @@ app.delete("/menus/:id", async (request, response) => {
 app.get("/menuitems", async (request, response) => {
   const menuitems = await MenuItem.findAll();
   response.send(menuitemsid, {
-    include:[Menu]
+    include: [Menu],
   });
 });
 app.get("/menuitems/:id", async (request, response) => {
