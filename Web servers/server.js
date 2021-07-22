@@ -55,7 +55,12 @@ app.get("/restaurants", async (request, response) => {
 app.get("/restaurants/:id", async (request, response) => {
   const restaurantid = request.params.id;
   const restaurant = await Restaurant.findByPk(restaurantid, {
-    include: [Menu],
+    include: [
+			{
+				model: Menu,
+				include: [MenuItem],
+			},
+		],
   });
   console.log(restaurant);
   if (restaurant === null) {
@@ -104,13 +109,13 @@ app.put("/restaurants/:id", async (request, response) => {
   response.send("Put resto");
 });
 //DELETE
-app.delete("/restaurants/:id", async (request, response) => {
+app.get("/restaurants/:id/delete", async (request, response) => {
   await Restaurant.destroy({
     where: {
       id: request.params.id,
     },
   });
-  response.send("Delete resto");
+  response.redirect('/restaurants')
 });
 //READ
 app.get("/menus", async (request, response) => {

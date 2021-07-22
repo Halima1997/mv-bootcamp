@@ -1,16 +1,34 @@
-<h1>{{restaurant.name}}
-</h1>
 <section>
-		{{#each restaurant.Menus}}
-			<article>
-				<h2>{{RestaurantId.menu}}</h2>
-				<dl>
-					<div>
-						<h5 class="card-title"> title {{this.title}}</h5>
-					
-					</div>
-				</dl>
-			</article>
-			{{/each}}
-<section></section>
+	<h1>{{restaurant.name}}</h1>
+	<div class="row justify-content-center align-content-center">
+		<div class="card" style="margin: 20px; width: 40%">
+			<img
+				src="{{restaurant.image}}"
+				alt="image of {{restaurant.name}}"
+			/>
+			<div class="card-body">
+				<h5 class="card-title">{{restaurant.name}}</h5>
+			</div>
+		</div>
+	</div>
 
+	<div class="row justify-content-center align-content-center">
+		{{#each restaurant.Menus}}
+			<div class="card col-xl-3 col-lg-4 col-md-5" style="margin: 20px">
+				<div class="card-body">
+					<h5 class="card-title">{{this.title}}</h5>
+					<ol class="card-text">
+						{{#each this.MenuItems}}
+							<li>
+								<p>
+									{{this.name}}
+									£{{this.price}}
+								</p>
+							</li>
+						{{/each}}
+					</ol>
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</section>
